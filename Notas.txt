@@ -1,0 +1,31 @@
+para limpiar todos los volumenes tiren un
+docker volume rm $(docker volumen ls -q) -f 
+Gabriela Arevalo10:25
+To remove all images there is a simple command to do that. docker rmi $(docker images -q)
+
+    Stop all running containers: docker stop $(docker ps -a -q)
+    Delete all stopped containers: docker rm $(docker ps -a -q)
+
+
+docker pull wordpress:latest
+
+docker run -p 8080:80 wordpress
+
+
+AGUSTIN ARIEL GONZALEZ CANOSA10:25
+para limpiar todos los volumenes tiren un
+docker volume rm $(docker volumen ls -q) -f 
+Gabriela Arevalo10:25
+To remove all images there is a simple command to do that. docker rmi $(docker images -q)
+
+    Stop all running containers: docker stop $(docker ps -a -q)
+    Delete all stopped containers: docker rm $(docker ps -a -q)
+Gabriela Arevalo10:27
+docker pull wordpress:latest
+docker run -p 8080:80 wordpress
+Gisela Nahir Pardini10:36
+sudo docker volume rm nomrevolumen
+Gisela Nahir Pardini10:37
+ docker prune
+docker volume prune
+sudo docker rm -v nombre contenedor

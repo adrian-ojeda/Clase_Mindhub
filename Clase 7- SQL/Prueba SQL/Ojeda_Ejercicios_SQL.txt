@@ -1,0 +1,136 @@
+
+Ojeda_Ejercicios_SQL
+
+
+1. De la tabla rental traer solo las columnas title, release_year, special_features y rating.
+
+SELECT title, release_year, special_features, rating
+FROM film;
+
+2. De la tabla actor traer solo el first_name y el last_name.
+
+SELECT first_name, last_name 
+FROM actor;
+
+3. De la tabla customer traer las columnas customer_id, first_name, email.
+
+SELECT customer_id, first_name, email 
+FROM customer;
+
+4. ¿Qué consulta tengo que ejecutar para traer todas las columnas de la tabla staff?
+
+SELECT * 
+FROM staff;
+
+5. Ver toda la tabla film_list completa.
+
+SELECT * 
+FROM film_list;
+
+6. Filtrar los registros de la tabla payment que hayan pagado exactamente $0.99.
+
+SELECT * 
+FROM payment 
+WHERE amount = 0.99;
+
+7. Idem a 6) pero traer solo las columnas customer_id, rental_id y amount para verificar que estén bien
+filtrados.
+
+SELECT customer_id, rental_id, amount 
+FROM payment 
+WHERE amount = 0.99; 
+
+8. De la tabla payment traer todos los alquileres del cliente cuyo número de cliente sea 386 y el monto pagado
+sea mayor a 2.
+
+SELECT * 
+FROM payment 
+WHERE customer_id = 386 AND amount > 2;
+
+9. ¿Cuáles son todas las películas que pertenece al género Horror? Usar la tabla film_list.
+
+SELECT * 
+FROM film_list 
+WHERE category = "Horror";
+
+10. ¿Qué películas pertenecen al género Foreign y duran más de 2 horas? Mostrar los títulos, la duración y el
+rating.
+
+SELECT DISTINCT title, length, rating 
+FROM film_list 
+WHERE category = "Foreign" and length > 120;
+
+11. Seleccionar de la tabla actor aquellos registros cuyo apellido sea Kilmer, Bloom o Wayne.
+
+SELECT * 
+FROM actor 
+WHERE last_name in ("KILMER", "BLOOM", "WAYNE");
+
+12. ¿Qué peliculas de la tabla film aceptan un período de alquiler entre 4 y 6 días? Mostrar solo las columnas
+título, duración del alquiler y duración de la pelicula.
+
+SELECT title, rental_duration, length 
+FROM film 
+WHERE rental_duration between 4 and 6;
+
+13. Un cliente de la tienda 2 efectuó un pago por un alquiler pero el personal se olvidó de registrarlo y ahora
+no recuerda bien el nombre, solo sabe que el nombre empezaba con "CH". Listar los posibles clientes
+para ver si el empleado recuerda el nombre. Ordernarlos por nombre. Recordar que el símbolo de
+porcentaje% se utiliza como comodín.
+
+SELECT store_id, first_name, last_name 
+FROM customer 
+WHERE first_name like "CH%" AND store_id = 2 
+ORDER BY first_name;
+
+14. ¿Cuáles son los distintos géneros de películas disponibles en el videoclub?
+
+SELECT DISTINCT category
+FROM inventory 
+JOIN film_list ON inventory.film_id = film_list.FID;
+
+15. Tabla film. ¿Qué películas cuestan menos de 4 dólares, duran entre 80 y 110 minutos y su rating es "PG-
+13"?
+
+SELECT * 
+FROM film 
+WHERE rental_rate < 4 and length BETWEEN 80 AND 110 AND rating ="PG-13" 
+ORDER BY length ASC;
+
+16. ¿Cuáles son los distintos valores posibles para el rating de las películas?
+
+SELECT DISTINC rating 
+FROM film;
+
+17. De la tabla customer_list filtrar los registros de los clientes que sean de Argentina o de Bolivia. Ordenar
+por país y por nombre.
+
+SELECT *
+FROM customer_list 
+WHERE country IN ("Argentina","Bolivia")
+ORDER BY country, name;
+
+18. ¿Cuántos clientes inactivos hay? Ver tabla customer.
+
+SELECT COUNT(*)
+FROM customer_list 
+WHERE notes != "active";
+
+19. ¿Cuál es el máximo y el mínimo monto pagos en el video club?, ¿y el promedio?
+
+SELECT MAX(amount) AS "MAXMO", MIN(amount) AS "MINIMO", AVG(amount) AS "PROMEDIO"  
+FROM payment 
+WHERE amount > 0;
+
+20. ¿Cuántas películas aptas para todo público hay?, ¿cuál es la duración promedio? Redondear el promedio.
+
+SELECT COUNT(title) AS "Cantidad ATP", ROUND(AVG(length),2) AS "D.Promedio" 
+FROM film
+WHERE rating LIKE "%G%";
+
+21. ¿Cuántos clientes hay de Argentina, Brazil, Bolivia o Chile? ¿Hay algún otro país de latinoamérica?
+
+SELECT COUNT() AS "Clientes Latam"
+FROM customer_list
+WHERE country IN ('Colombia', 'Costa Rica', 'Cuba', 'Ecuador', 'El Salvador', 'Guatemala', 'Honduras', 'Mexico', 'Nicaragua', 'Panama', 'Paraguay', 'Peru', 'Puerto Rico','Republica Dominicana', 'Uruguay','Venezuela');
+
